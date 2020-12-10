@@ -1,0 +1,27 @@
+
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th *ngFor="let cabecera of cabeceras | paginate: { itemsPerPage: 4, currentPage: p }">{{cabecera}}</th>
+      <th *ngIf="isMantenimiento==true">Operaciones</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let persona of personas">
+      <td>{{persona.idpersona}}</td>
+      <td>{{persona.nombreCompleto}}</td>
+      <td>{{persona.telefono}}</td>
+      <td>{{persona.correo}}</td>
+      <td>{{persona.fechaCadena}}</td>
+      <td *ngIf="isMantenimiento==true">
+        <i [routerLink]="['/personaFormMantenimiento',persona.idpersona]" class="glyphicon glyphicon-edit btn btn-primary"></i>
+        <i class="glyphicon glyphicon-trash btn btn-danger" (click)="eliminarPersona(persona.idpersona)"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

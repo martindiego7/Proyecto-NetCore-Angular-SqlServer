@@ -1,0 +1,88 @@
+
+<h1>{{titulo}}</h1>
+<div class="row">
+  <div class="col-md-12">
+
+    <form [formGroup]="persona" (ngSubmit)="guardarDatos()">
+
+      <div class="form-group">
+        <label>Id Persona</label>
+        <input type="text" class="form-control" readonly formControlName="idpersona" />
+      </div>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" />
+        <div style="color: red" *ngIf="persona.controls['nombre'].errors?.required">
+          El nombre de la persona es obligatoria
+        </div>
+        <div style="color: red" *ngIf="persona.controls['nombre'].errors?.maxlength">
+          Supero la cantidad maxima de caracteres permitidos
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Apellido paterno</label>
+        <input type="text" class="form-control" formControlName="apPaterno" />
+        <div style="color: red" *ngIf="persona.controls['apPaterno'].errors?.required">
+          El apellido paterno de la persona es obligatoria
+        </div>
+        <div style="color: red" *ngIf="persona.controls['apPaterno'].errors?.maxlength">
+          Supero la cantidad maxima de caracteres permitidos
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Apellido materno</label>
+        <input type="text" class="form-control" formControlName="apMaterno" />
+        <div style="color: red" *ngIf="persona.controls['apMaterno'].errors?.required">
+          El apellido materno de la persona es obligatoria
+        </div>
+        <div style="color: red" *ngIf="persona.controls['apMaterno'].errors?.maxlength">
+          Supero la cantidad maxima de caracteres permitidos
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Telefono</label>
+        <input type="number" class="form-control" formControlName="telefono" />
+        <div style="color: red" *ngIf="persona.controls['telefono'].errors?.required">
+          El telefono de la persona es obligatoria
+        </div>
+        <div style="color: red" *ngIf="persona.controls['telefono'].errors?.maxlength">
+          Supero la cantidad maxima de caracteres permitidos
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Correo</label>
+        <input type="text" class="form-control" formControlName="correo" />
+        <div style="color: red" *ngIf="persona.controls['correo'].errors?.required">
+          El correo de la persona es obligatoria
+        </div>
+        <div style="color: red" *ngIf="persona.controls['correo'].errors?.maxlength">
+          Supero la cantidad maxima de caracteres permitidos
+        </div>
+        <div style="color: red" *ngIf="persona.controls['correo'].errors?.pattern">
+          El correo no es valido
+        </div>
+        <div style="color: red" *ngIf="persona.controls['correo'].errors?.yaExiste">
+          El correo ya existe en el sistema, favor ingresar uno nuevo
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Fecha nacimiento</label>
+        <input type="date" class="form-control" formControlName="fechaNacimiento" />
+        <div style="color: red" *ngIf="persona.controls['fechaNacimiento'].errors?.required">
+          La Fecha de Nacimiento de la persona es obligatoria
+        </div>
+      </div>
+      <div>
+        <input [disabled]="!persona.valid" type="submit" class="btn btn-primary" value="Guardar" />
+        <button [routerLink]="['/mantenimientoPersona']" class="btn btn-danger">Regresar</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+<div style="margin:1em" *ngIf="persona.valid==false">
+  <div class="alert alert-danger">El formulario no es valido, Verifique que sean correctos los datos</div>
+</div>
+

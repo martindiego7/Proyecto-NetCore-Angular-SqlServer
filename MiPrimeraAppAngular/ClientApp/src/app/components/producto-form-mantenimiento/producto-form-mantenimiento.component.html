@@ -1,0 +1,79 @@
+<h1>{{titulo}}</h1>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <form [formGroup]="producto" (ngSubmit)="guardarDatos()">
+
+      <div class="form-group">
+        <label>ID Producto</label>
+        <input type="text" class="form-control" readonly formControlName="idproducto" />
+      </div>
+      <div class="form-group">
+        <label>Nombre Producto</label>
+        <input type="text" class="form-control" formControlName="nombre" />
+        <div style="color:red" *ngIf="producto.controls['nombre'].errors?.required">
+          El nombre del producto es obligatorio
+        </div>
+        <div style="color:red" *ngIf="producto.controls['nombre'].errors?.maxlength">
+          supero la longitud maxima
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Precio</label>
+        <input type="number" min="0" class="form-control" formControlName="precio" />
+        <div style="color:red" *ngIf="producto.controls['precio'].errors?.required">
+          El precio del producto es obligatorio
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Categoria</label>
+        <select formControlName="idcategoria" class="form-control btn btn-primary">
+          <option value="">--Seleccione--</option>
+          <option [value]="categoria.idcategoria" *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
+        </select>
+        <div style="color:red" *ngIf="producto.controls['idcategoria'].errors?.required">
+          La Categoria del producto es obligatorio
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Marca</label>
+        <select formControlName="idmarca" class="form-control btn btn-primary">
+          <option value="">--Seleccione--</option>
+          <option [value]="marca.idmarca" *ngFor="let marca of marcas">{{marca.nombre}}</option>
+        </select>
+        <div style="color:red" *ngIf="producto.controls['idmarca'].errors?.required">
+          La Marca del producto es obligatorio
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Stock</label>
+        <input type="number" min="0" class="form-control" formControlName="stock" />
+        <div style="color:red" *ngIf="producto.controls['stock'].errors?.required">
+          El Stock del producto es obligatorio
+        </div>
+        <div style="color:red" *ngIf="producto.controls['stock'].errors?.puntoDecimal">
+          Esta prohivido poner un punto decimal
+        </div>
+        </div>
+
+      <div class="form-group">
+        <img src="{{foto}}" width="200" height="200"/>
+        <input type="file" (change)="subirFoto()" id="fupFoto" class="form-control" accept="image/*"/>
+      </div>
+      <div>
+        <input [disabled]="!producto.valid" type="submit" class="btn btn-primary" value="Guardar" />
+        <button [routerLink]="['/mantenimientoProducto']" class="btn btn-danger">Regresar</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+<div style="margin:1em" *ngIf="producto.valid==false">
+  <div class="alert alert-danger">El formulario no es valido, Verifique que sean correctos los datos</div>
+</div>
+

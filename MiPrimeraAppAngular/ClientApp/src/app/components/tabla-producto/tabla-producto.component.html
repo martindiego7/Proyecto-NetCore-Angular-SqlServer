@@ -1,0 +1,29 @@
+
+
+
+<table class="table">
+
+  <thead class="thead-dark">
+    <tr>
+      <th *ngFor="let cabecera of cabeceras">{{cabecera}}</th>
+      <th *ngIf="isMantenimiento==true">Operaciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let producto of productos | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td>{{producto.idproducto}}</td>
+      <td>{{producto.nombre}}</td>
+      <td>{{producto.precio}}</td>
+      <td>{{producto.stock}}</td>
+      <td>{{producto.nombreCategoria}}</td>
+      <td *ngIf="isMantenimiento==true">
+        <i [routerLink]="['/productoFormMantenimiento', producto.idproducto]" class="glyphicon glyphicon-edit btn btn-primary"></i>
+        <i class="glyphicon glyphicon-trash btn btn-danger" (click)="eliminarProducto(producto.idproducto)"></i>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

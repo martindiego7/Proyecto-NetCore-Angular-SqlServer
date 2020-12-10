@@ -1,0 +1,7 @@
+
+<label>ingrese tipo de usuario</label>
+
+<select #tipo class="btn btn-primary" (change)="filtrar(tipo)">
+  <option value="">--Seleccione--</option>
+  <option *ngFor="let tipo of tipoUsuario" [value]="tipo.idtipoUsuario">{{tipo.nombre}}</option>
+</select>

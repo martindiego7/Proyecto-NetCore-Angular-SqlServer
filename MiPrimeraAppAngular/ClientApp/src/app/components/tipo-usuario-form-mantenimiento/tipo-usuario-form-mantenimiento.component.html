@@ -1,0 +1,43 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="tipoUsuario" (ngSubmit)="guardarDatos()">
+      <div class="form-group">
+        <label>Id Tipo Usuario</label>
+        <input type="text" formControlName="idtipousuario" class="form-control" readonly />
+      </div>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control" />
+        <div style="color:red" *ngIf="tipoUsuario.controls['nombre'].errors?.required">
+          Este campo es requerido
+        </div>
+        <div style="color:red" *ngIf="tipoUsuario.controls['nombre'].errors?.maxlength">
+          Excedio el maximo de caracteres del campo
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Descripcion</label>
+        <input type="text" formControlName="descripcion" class="form-control" />
+        <div style="color:red" *ngIf="tipoUsuario.controls['descripcion'].errors?.required">
+          Este campo es requerido
+        </div>
+        <div style="color:red" *ngIf="tipoUsuario.controls['descripcion'].errors?.maxlength">
+          Excedio el maximo de caracteres del campo
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Seleccione las paginas</label>
+        <div *ngFor="let pagina of paginas" class="col-md-12">
+          <input class="check" [name]="pagina.idpagina" (change)="verCheck()" type="checkbox" />
+          <label>{{pagina.mensaje}}</label>
+        </div>
+      </div>
+
+      <div>
+        <input [disabled]="!tipoUsuario.valid" type="submit" class="btn btn-primary" value="Guardar" />
+        <button [routerLink]="['/mantenimientoTipoUsuario']" class="btn btn-danger">Regresar</button>
+      </div>
+    </form>
+  </div>
+</div>

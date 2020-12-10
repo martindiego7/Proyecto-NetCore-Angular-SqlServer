@@ -1,0 +1,74 @@
+
+<h1>{{titulo}}</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="usuario" (ngSubmit)="guardarDatos()">
+      <div class="form-group">
+        <label>Id Usuario</label>
+        <input type="text" readonly class="form-control" formControlName="idusuario" />
+      </div>
+      <div class="form-group">
+        <label>Nombre Usuario</label>
+        <input type="text" class="form-control" formControlName="nombreUsuario" />
+        <div style="color:red" *ngIf="usuario.controls['nombreUsuario'].errors?.required">
+          Este campo es requerido
+        </div>
+        <div style="color:red" *ngIf="usuario.controls['nombreUsuario'].errors?.maxlength">
+          Supero la longitud maxima
+        </div>
+        <!--<div style="color:red" *ngIf="usuario.controls['nombreUsuario'].errors?.yaExiste && ver==true" >
+          El usuario ya existe
+        </div>-->
+      </div>
+      <div class="form-group" *ngIf="ver==true">
+        <label>Ingrese Contraseña</label>
+        <input type="password" class="form-control" formControlName="contra" />
+        <div style="color:red" *ngIf="usuario.controls['contra'].errors?.required">
+          Este campo es requerido
+        </div>
+        <div style="color:red" *ngIf="usuario.controls['contra'].errors?.maxlength">
+          Supero la longitud maxima
+        </div>
+      </div>
+      <div class="form-group" *ngIf="ver==true">
+        <label>Repita Contraseña</label>
+        <input type="password" class="form-control" formControlName="contra2" />
+        <div style="color:red" *ngIf="usuario.controls['contra2'].errors?.required">
+          Este campo es requerido
+        </div>
+        <div style="color:red" *ngIf="usuario.controls['contra2'].errors?.maxlength">
+          Supero la longitud maxima
+        </div>
+        <div style="color:red" *ngIf="usuario.controls['contra2'].errors?.noIguales">
+          La contraseña no coincide con la ingresada
+        </div>
+      </div>
+      <div class="form-group" *ngIf="ver==true">
+        <label>Persona</label>
+        <select class="form-control" formControlName="idpersona">
+          <option value="">--Seleccione--</option>
+          <option [value]="persona.idpersona" *ngFor="let persona of personas">{{persona.nombreCompleto}}</option>
+        </select>
+        <div style="color:red" *ngIf="usuario.controls['idpersona'].errors?.required">
+          Este campo es requerido
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tipo Persona</label>
+        <select class="form-control" formControlName="idTipoUsuario">
+          <option value="">--Seleccione--</option>
+          <option [value]="tipoUsuario.idtipoUsuario" *ngFor="let tipoUsuario of tipoUsuarios">{{tipoUsuario.nombre}}</option>
+        </select>
+        <div style="color:red" *ngIf="usuario.controls['idTipoUsuario'].errors?.required">
+          Este campo es requerido
+        </div>
+      </div>
+
+      <div>
+        <input [disabled]="!usuario.valid" value="Enviar" type="submit" class="btn btn-primary" />
+        <input value="Regresar" type="button" [routerLink]="['/mantenimientoUsuario']"class="btn btn-danger"/>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+
+<h1>{{titulo}}</h1>
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="pagina" (ngSubmit)="guardarDatos()">
+      <div class="form-group">
+        <label>Id Pagina</label>
+        <input type="text" class="form-control" formControlName="idpagina" readonly />
+      </div>
+
+      <div class="form-group">
+        <input type="radio" name="bvisible" value=1 formControlName="bvisible"/>
+        <label>Visible</label>
+        <input type="radio" name="bvisible" value=0 formControlName="bvisible"/>
+        <label>No Visible</label>
+      </div>
+
+      <div class="form-group">
+        <label>Mensaje</label>
+        <input type="text" class="form-control" formControlName="mensaje" />
+        <div style="color:red" *ngIf="pagina.controls['mensaje'].errors?.required">
+          Este campo es requerido
+        </div>
+        <div style="color:red" *ngIf="pagina.controls['mensaje'].errors?.maxlength">
+          Excedio el maximo de caracteres del campo
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Accion</label>
+        <input type="text" class="form-control" formControlName="accion" />
+        <div style="color:red" *ngIf="pagina.controls['accion'].errors?.required">
+          Este campo es requerido
+        </div>
+        <div style="color:red" *ngIf="pagina.controls['accion'].errors?.maxlength">
+          Excedio el maximo de caracteres del campo
+        </div>
+      </div>
+
+      <div>
+        <input [disabled]="!pagina.valid" type="submit" class="btn btn-primary" value="Guardar" />
+        <button [routerLink]="['/mantenimientoPagina']" class="btn btn-danger">Regresar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

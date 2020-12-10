@@ -1,0 +1,10 @@
+
+<label>Ingrese nombre categoria</label>
+
+<select class="selectpicker" data-style="btn-primary" #categoria>
+  <option value="">--Seleccione--</option>
+  <option [value]="categoria.idcategoria" *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
+</select>
+
+<input type="button" (click)="buscar(categoria)" value="Buscar" class="btn btn-primary"/>
+<input type="button" (click)="limpiar(categoria)" value="Eliminar" class="btn btn-danger"/>
